@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -39,29 +42,36 @@ public class TestShapes {
          Circle has the largest area as 50.24
          */
 
+
+
+        Rectangle rectangle = new Rectangle(5.5, 6);
         Circle circle = new Circle();
         circle.setRadius(4);
-        System.out.println(circle + "\nArea of the Circle is = " + circle.getArea()
-                + "\nPerimeter of the Circle is =" + circle.getPerimeter() + "\n");
-
-        Rectangle rectangle = new Rectangle();
-        rectangle.setHeight(6);
-        rectangle.setWidth(5.5);
-        System.out.println(rectangle + "\nArea of the Circle is = " + rectangle.getArea()
-            + "\nPerimeter of the Rectangle is = " + rectangle.getPerimeter() + "\n");
-
         Square square = new Square();
         square.setSide(2.5);
-        System.out.println(square + "\nArea of the Square is = " + square.getArea()
-                + "\nPerimeter of the Square is = " + square.getPerimeter() + "\n");
 
+        List<Shape> shapes = Arrays.asList(circle, square, rectangle);
 
-        if (circle.getArea() > rectangle.getArea() && circle.getArea() > square.getArea())
-            System.out.println("Circle has the largest area as " + circle.getArea());
-        else if (rectangle.getArea() > circle.getArea() && rectangle.getArea() > square.getArea())
-            System.out.println("Rectangle has the largest area as " + rectangle.getArea());
-        else System.out.println("Square has the largest area as " + square.getArea());
+        for (int i = 0; i < shapes.size(); i++) {
+            Shape s = shapes.get(i);
+            System.out.println(shapes.get(i));
+            System.out.println("\nArea of the = " + s.getClass().getSimpleName() + " is " + s.getArea() + "\n");
+            System.out.println("\nArea of the = " + s.getClass().getSimpleName() + " is " + s.getPerimeter() + "\n");
+        }
 
+        Shape s = shapes.stream().reduce(shapes.get(0), (first, next) -> getLargestArea(first, next)); // throwing into a pipeline [c1, r1, s1]
 
+//        Shape s = shapes.get(0);
+//        for(int i = 1; i < shapes.size(); i++){
+//            s = getLargestArea(s, shapes.get(i));
+//        }
+       System.out.println(s.getClass().getSimpleName() + " has the largest area as " + s.getArea());
+    }
+
+    // helper method
+    // if they happen to have the same area, return the first one
+    public static Shape getLargestArea(Shape s1, Shape s2){
+        if (s1.getArea() > s2.getArea()) return s1;
+        else return s2;
     }
 }

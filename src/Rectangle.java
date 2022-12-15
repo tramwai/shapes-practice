@@ -8,6 +8,11 @@
 //implement Shape interface and provide abstract method implementation
 public class Rectangle implements Shape{
 
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
     /**
     Define instance variables of rectangle as below
     Instance variables must be encapsulated
@@ -20,6 +25,10 @@ public class Rectangle implements Shape{
 
     public double getWidth() {
         return width;
+    }
+
+    public double getHeight() {
+        return height;
     }
 
     public void setWidth(double width) {
